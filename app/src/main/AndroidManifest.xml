@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.IntelliHome"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".Busqueda"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroPropiedad"
+            android:exported="false" />
+        <activity
+            android:name=".Perfil"
+            android:exported="false" />
+        <activity
+            android:name=".Domotica"
+            android:exported="false"
+            android:label="@string/title_activity_domotica"
+            android:theme="@style/Theme.IntelliHome">
+            <!-- Intent filter para detectar la conexión del USB -->
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
+        <activity
+            android:name=".Historial"
+            android:exported="false" />
+        <activity
+            android:name=".PasarelaPagos"
+            android:exported="false" />
+        <activity
+            android:name=".Recuperar2"
+            android:exported="false" />
+        <activity
+            android:name=".RecuperarContrasena"
+            android:exported="false" />
+        <activity
+            android:name=".LogIn"
+            android:exported="true"
+            android:label="@string/title_activity_log_in"
+            android:theme="@style/Theme.IntelliHome">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Custom"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage"
+            android:exported="false" />
+    </application>
+
+</manifest>

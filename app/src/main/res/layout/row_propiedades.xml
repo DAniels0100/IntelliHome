@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/wallet_holo_blue_light"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/nombreTv"
+                android:textSize="20dp"
+                android:text="Nombre: "
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+            <TextView
+                android:id="@+id/ubicacionTv"
+                android:textSize="20dp"
+                android:text="Ubicacion: "
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+            <TextView
+                android:id="@+id/amenidadesCasaTv"
+                android:textSize="20dp"
+                android:text="Amenidades: "
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+            <TextView
+                android:id="@+id/cantidadHabitacionesTv"
+                android:textSize="20dp"
+                android:text="Cantidad Habitaciones: "
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+            <TextView
+                android:id="@+id/cantidadPersonasTv"
+                android:textSize="20dp"
+                android:text="Cantidad Personas: "
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+            <TextView
+                android:id="@+id/precioTv"
+                android:textSize="20dp"
+                android:text="Precio: "
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+        
+
+</LinearLayout>

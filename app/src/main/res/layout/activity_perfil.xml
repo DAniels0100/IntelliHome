@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Perfil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText"
+    tools:context=".Perfil">
+
+    <!-- Logo IntelliHome -->
+    <ImageView
+        android:id="@+id/logoIntelliHome"
+        android:layout_width="164dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/logodeintellihome"
+        android:src="@drawable/logo_ih"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <!-- Botón Regresar -->
+    <ImageView
+        android:id="@+id/botonRegresar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/botonRegresar"
+        android:src="@drawable/botonregresar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Imagen de subir -->
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="135dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/button_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/logoIntelliHome" />
+
+    <ImageView
+        android:id="@+id/fondomenu"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:src="@drawable/fondomenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Historial -->
+    <ImageView
+        android:id="@+id/historial"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:src="@drawable/historial"
+        app:layout_constraintStart_toStartOf="@id/fondomenu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <!-- Domótica -->
+    <ImageView
+        android:id="@+id/domotica"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:src="@drawable/domotica"
+        app:layout_constraintStart_toEndOf="@id/historial"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="32dp" />
+
+    <!-- Búsqueda -->
+    <ImageView
+        android:id="@+id/busquedamenu"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:src="@drawable/busqueda"
+        app:layout_constraintStart_toEndOf="@id/domotica"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="5dp"/>
+
+    <!-- Perfil Menú -->
+    <ImageView
+        android:id="@+id/perfilmenu"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:src="@drawable/perfil"
+        app:layout_constraintStart_toEndOf="@id/busquedamenu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="5dp"/>
+
+    <!-- Campos de texto en pares (Nombre y Apellidos) -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="414dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagen">
+
+        <!-- Nombre -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="#477991"
+            app:boxStrokeWidth="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nombreInput"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:hint="Nombre"
+                android:drawableRight="@drawable/lapizeditar"
+                android:padding="6dp"
+                android:textColorHint="#477991"
+                tools:ignore="TouchTargetSizeCheck"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Apellidos -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="#477991"
+            app:boxStrokeWidth="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/apellidoInput"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:hint="Apellidos"
+                android:padding="6dp"
+                android:textColorHint="#477991"
+                android:drawableRight="@drawable/lapizeditar"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <!-- Campos de texto en pares (Edad y Teléfono) -->
+    <!-- Campo de texto para la edad -->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+
+        <!-- Edad -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="#477991"
+            app:boxStrokeWidth="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edadInput"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="true"
+                android:drawableRight="@drawable/lapizeditar"
+                android:focusable="false"
+                android:hint="Edad"
+                android:padding="6dp"
+                android:textColorHint="#477991"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Teléfono -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="#477991"
+            app:boxStrokeWidth="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/numeroTelefonoInput"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/banderacostrica"
+                android:drawablePadding="4dp"
+                android:hint="+506"
+                android:padding="6dp"
+                android:paddingTop="180dp"
+                android:textColorHint="#477991"
+                android:inputType="phone"
+                tools:ignore="TouchTargetSizeCheck"
+                android:drawableRight="@drawable/lapizeditar"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <!-- Campo de texto para el nickname/username -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="#477991"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nicknameInput"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="Nickname"
+            android:padding="6dp"
+            android:textColorHint="#477991"
+            tools:ignore="TouchTargetSizeCheck"
+            android:drawableRight="@drawable/lapizeditar"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de texto para el Correo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="#477991"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailInput"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress"
+            android:padding="6dp"
+            android:drawableRight="@drawable/lapizeditar"
+            android:textColorHint="#477991"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de texto para la Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="#477991"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contrasenaInput"
+            android:layout_width="360dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:padding="6dp"
+            android:textColorHint="#477991"
+            tools:ignore="TouchTargetSizeCheck"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de texto para el domicilio -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="#477991"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/domicilioInput"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="Domicilio"
+            android:padding="6dp"
+            android:textColorHint="#477991"
+            tools:ignore="TouchTargetSizeCheck"
+            android:drawableRight="@drawable/lapizeditar"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de texto para el pasatiempos -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="185dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="#477991"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pasatiemposInput"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:drawableRight="@drawable/lapizeditar"
+            android:focusable="false"
+            android:hint="Pasatiempos"
+            android:padding="6dp"
+            android:textColorHint="#477991"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de texto para el preferencias de casa -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxStrokeColor="#477991"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/preferenciasCasaInput"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:drawableRight="@drawable/lapizeditar"
+            android:focusable="false"
+            android:hint="Preferencias de casa"
+            android:padding="6dp"
+            android:textColorHint="#477991"
+            tools:ignore="TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botón Métodos de Pago -->
+    <Button
+        android:id="@+id/metodosPagoBtn"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="390dp"
+        android:text="Métodos de Pago"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:backgroundTint="#477991"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagen"/>
+    <!-- Botón Métodos de Pago -->
+    <Button
+        android:id="@+id/logOutBtn"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="440dp"
+        android:text="Cerrar sesion"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:backgroundTint="#477991"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagen"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

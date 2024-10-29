@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#E0F7FA"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tvTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Personalizar"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="5dp" />
+
+
+    <ImageView
+        android:id="@+id/btnColor1"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/paleta0"
+        android:src="@drawable/paleta_cero" />
+
+    <ImageView
+        android:id="@+id/btnColor2"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/paleta1"
+        android:src="@drawable/paleta_uno" />
+
+    <ImageView
+        android:id="@+id/btnColor3"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:contentDescription="@string/paleta2"
+        android:src="@drawable/paleta_dos"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/btnColor4"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:contentDescription="@string/paleta3"
+        android:src="@drawable/paleta_tres"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/btnColor5"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:contentDescription="@string/paleta4"
+        android:src="@drawable/paleta_cuatro"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/Idioma"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:background="@color/black"
+        android:paddingBottom="50dp"
+        android:text="@string/Inglés"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:background="@color/black"
+        android:paddingTop="100dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Español"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
