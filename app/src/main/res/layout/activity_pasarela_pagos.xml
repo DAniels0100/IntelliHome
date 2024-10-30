@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".PasarelaPagos">
 
+    <!-- Botón Regresar -->
+    <ImageView
+        android:id="@+id/botonRegresar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/botonRegresar"
+        android:src="@drawable/botonregresar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/amountEditText"
         android:layout_width="wrap_content"

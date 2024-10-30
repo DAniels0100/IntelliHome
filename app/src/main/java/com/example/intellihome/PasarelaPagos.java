@@ -1,14 +1,17 @@
 
 package com.example.intellihome;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.kittinunf.fuel.Fuel;
 import com.github.kittinunf.fuel.core.FuelError;
@@ -42,6 +45,20 @@ public class PasarelaPagos extends AppCompatActivity {
             } else {
                 amount = amountEditText.getText().toString() + "00";
                 getDetails();
+            }
+        });
+
+        // Encuentra el botón de regreso en el layout
+        ImageView btnBack = findViewById(R.id.botonRegresar);
+
+        // Asigna el evento onClick al botón de regreso
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirige a HomePage
+                Intent intent = new Intent(PasarelaPagos.this, Perfil.class);
+                startActivity(intent);
+                finish(); // Finaliza la actividad actual
             }
         });
 

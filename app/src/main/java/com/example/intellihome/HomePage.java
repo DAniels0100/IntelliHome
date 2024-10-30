@@ -133,7 +133,7 @@ public class HomePage extends AppCompatActivity {
             historialMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(HomePage.this, RegistroPropiedad.class));
+                    startActivity(new Intent(HomePage.this, Historial.class));
                     finish();
                 }
             });

@@ -1,20 +1,20 @@
 package com.example.intellihome;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -40,6 +40,20 @@ public class RegistroPropiedad extends AppCompatActivity {
 
         // Inicializa la referencia de la base de datos de Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Propiedades");
+
+        // Encuentra el botón de regreso en el layout
+        ImageView btnBack = findViewById(R.id.botonRegresar);
+
+        // Asigna el evento onClick al botón de regreso
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirige a HomePage
+                startActivity(new Intent(RegistroPropiedad.this, Historial.class));
+                finish(); // Finaliza la actividad actual
+            }
+        });
+
 
         // Configura la acción del botón Registrar
         registrarCasaBtn.setOnClickListener(new View.OnClickListener() {
