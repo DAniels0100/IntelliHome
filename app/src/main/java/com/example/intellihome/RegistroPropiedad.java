@@ -18,12 +18,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import com.example.intellihome.pojo.Propiedad;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,20 +62,6 @@ public class RegistroPropiedad extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Propiedades");
         storageReference = FirebaseStorage.getInstance().getReference("ImagenesPropiedades");
 
-        // Encuentra el botón de regreso en el layout
-        ImageView btnBack = findViewById(R.id.botonRegresar);
-
-        // Asigna el evento onClick al botón de regreso
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Redirige a HomePage
-                startActivity(new Intent(RegistroPropiedad.this, Historial.class));
-                finish(); // Finaliza la actividad actual
-            }
-        });
-
-
         // Configura la acción del botón Registrar
         registrarCasaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,9 +74,21 @@ public class RegistroPropiedad extends AppCompatActivity {
         //Configuracion del campo de foto
         imagenPropiedad.setOnClickListener(view -> showImageOptionsDialog());
 
-
         // Configuración del campo de amenidades con selección múltiple
         amenidadesCasaInput.setOnClickListener(v -> showAmenitiesDialog(amenidadesCasaInput));
+
+        // Encuentra el botón de regreso en el layout
+        ImageView btnBack = findViewById(R.id.botonRegresar);
+
+        // Asigna el evento onClick al botón de regreso
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirige a HomePage
+                startActivity(new Intent(RegistroPropiedad.this, Historial.class));
+                finish(); // Finaliza la actividad actual
+            }
+        });
     }
 
     //subir foto
@@ -127,6 +129,7 @@ public class RegistroPropiedad extends AppCompatActivity {
         Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -226,21 +229,15 @@ public class RegistroPropiedad extends AppCompatActivity {
         Propiedad propiedad = new Propiedad(nombrePropiedad, precio, ubicacion, amenidadesCasa, cantidadPersonas, cantidadHabitaciones, null);
         try{
             subirImagenYRegistrarPropiedad(propiedad);
-            Toast.makeText(RegistroPropiedad.this, "Propiedad registrada exitosamente", Toast.LENGTH_SHORT).show();
-            limpiarCampos();
+            if (imageUri != null){
+                Toast.makeText(RegistroPropiedad.this, "Propiedad registrada exitosamente", Toast.LENGTH_SHORT).show();
+                limpiarCampos();
+            }
         }catch (Exception e){
             Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad"+e, Toast.LENGTH_SHORT).show();
         }
 
-        // Guardar la propiedad con el nombre de la casa como ID en Firebase
-        /*databaseReference.child(nombrePropiedad).setValue(propiedad).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(RegistroPropiedad.this, "Propiedad registrada exitosamente", Toast.LENGTH_SHORT).show();
-                limpiarCampos();
-            } else {
-                Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+
     }
 
     private void limpiarCampos() {
@@ -276,6 +273,4 @@ public class RegistroPropiedad extends AppCompatActivity {
         builder.setNegativeButton("Cancelar", null);
         builder.create().show();
     }
-
 }
-
