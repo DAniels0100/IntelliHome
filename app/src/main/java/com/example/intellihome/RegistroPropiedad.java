@@ -18,16 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.example.intellihome.pojo.Propiedad;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,6 +57,20 @@ public class RegistroPropiedad extends AppCompatActivity {
         // Inicializa la referencia de la base de datos de Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Propiedades");
         storageReference = FirebaseStorage.getInstance().getReference("ImagenesPropiedades");
+
+        // Encuentra el botón de regreso en el layout
+        ImageView btnBack = findViewById(R.id.botonRegresar);
+
+        // Asigna el evento onClick al botón de regreso
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirige a HomePage
+                startActivity(new Intent(RegistroPropiedad.this, Historial.class));
+                finish(); // Finaliza la actividad actual
+            }
+        });
+
 
         // Configura la acción del botón Registrar
         registrarCasaBtn.setOnClickListener(new View.OnClickListener() {
