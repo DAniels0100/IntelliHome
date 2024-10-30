@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "217556004383",
+    "firebase_url": "https://intellihome-293ec-default-rtdb.firebaseio.com",
+    "project_id": "intellihome-293ec",
+    "storage_bucket": "intellihome-293ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217556004383:android:c18fb117595871ae456f2a",
+        "android_client_info": {
+          "package_name": "com.example.intellihome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217556004383-7hnm49r85bshsbrsq3tisqgecp5qhocb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.intellihome",
+            "certificate_hash": "6e0f84528404e82fd0c58168d40f1e4f9a5bd351"
+          }
+        },
+        {
+          "client_id": "217556004383-7vb798p75uig7mhpc26nrlq0n20ckkr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpJ-3S-IyYvuZJRnfhdDfRTXH1VKc2nLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217556004383-7vb798p75uig7mhpc26nrlq0n20ckkr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
