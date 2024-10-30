@@ -20,6 +20,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Botón Regresar -->
+    <ImageView
+        android:id="@+id/botonRegresar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/botonRegresar"
+        android:src="@drawable/botonregresar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <!-- Campo de texto para el nombre propiedad -->
     <LinearLayout
         android:id="@+id/linearLayout2"
