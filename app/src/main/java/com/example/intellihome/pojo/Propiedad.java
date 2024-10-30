@@ -3,32 +3,37 @@ package com.example.intellihome.pojo;
 import com.google.firebase.database.PropertyName;
 
 public class Propiedad {
-    private String nombre;
+    private String nombrePropiedad;
     private String ubicacion;
-    private String amenidades;
+    private String amenidadesCasa;
     private int cantidadHabitaciones;
     private int cantidadPersonas;
     private String precio;
+    private String imagenUrl;  // Nuevo campo
 
+    // Constructor vacío requerido por Firebase
     public Propiedad() {}
 
-    public Propiedad(String nombre, String ubicacion, String amenidades, String precio, int cantidadHabitaciones, int cantidadPersonas) {
-        this.nombre = nombre;
-        this.ubicacion = ubicacion;
-        this.amenidades = amenidades;
-        this.cantidadHabitaciones = cantidadHabitaciones;
+    // Constructor con todos los campos
+    public Propiedad(String nombrePropiedad,
+                     String precio, String ubicacion, String amenidadesCasa, int cantidadPersonas, int cantidadHabitaciones, String imagenUrl) {
+        this.nombrePropiedad = nombrePropiedad;
         this.cantidadPersonas = cantidadPersonas;
+        this.cantidadHabitaciones = cantidadHabitaciones;
         this.precio = precio;
+        this.ubicacion = ubicacion;
+        this.amenidadesCasa = amenidadesCasa;
+        this.imagenUrl = imagenUrl;
     }
 
     @PropertyName("nombrePropiedad")
     public String getNombre() {
-        return nombre;
+        return nombrePropiedad;
     }
 
     @PropertyName("nombrePropiedad")
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombrePropiedad = nombre;
     }
 
     @PropertyName("ubicacion")
@@ -43,12 +48,12 @@ public class Propiedad {
 
     @PropertyName("amenidadesCasa")
     public String getAmenidades() {
-        return amenidades;
+        return amenidadesCasa;
     }
 
     @PropertyName("amenidadesCasa")
     public void setAmenidades(String amenidades) {
-        this.amenidades = amenidades;
+        this.amenidadesCasa = amenidades;
     }
 
     public int getCantidadHabitaciones() {
@@ -74,4 +79,15 @@ public class Propiedad {
     public void setPrecio(String precio) {
         this.precio = precio;
     }
+
+    @PropertyName("imagenUrl")
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    @PropertyName("imagenUrl")
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
 }
+
