@@ -56,7 +56,7 @@ public class PasarelaPagos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Redirige a HomePage
-                Intent intent = new Intent(PasarelaPagos.this, Perfil.class);
+                Intent intent = new Intent(PasarelaPagos.this, HomePage.class);
                 startActivity(intent);
                 finish(); // Finaliza la actividad actual
             }

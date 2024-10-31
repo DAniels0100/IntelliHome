@@ -15,19 +15,28 @@ import java.util.List;
 
 public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.viewHolderPropiedad> {
 
-    List<Propiedad> propiedadList;
+    private List<Propiedad> propiedadList;
+    private OnItemClickListener listener;
 
     public AdapterPropiedad(List<Propiedad> propiedadList) {
         this.propiedadList = propiedadList;
     }
 
+    // Define an interface to handle clicks
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    // Set the listener from the activity
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public viewHolderPropiedad onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_propiedades,parent,false);
-        viewHolderPropiedad holder = new viewHolderPropiedad(v);
-        return holder;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_propiedades, parent, false);
+        return new viewHolderPropiedad(v, listener);
     }
 
     @Override
@@ -38,8 +47,6 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
         holder.ubicacion.setText(propiedad.getUbicacion());
         holder.amenidades.setText(propiedad.getAmenidades());
         holder.precio.setText(propiedad.getPrecio());
-
-        // Convertir int a String antes de asignar al TextView
         holder.cantidadHabitaciones.setText(String.valueOf(propiedad.getCantidadHabitaciones()));
         holder.cantidadPersonas.setText(String.valueOf(propiedad.getCantidadPersonas()));
     }
@@ -53,8 +60,7 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
 
         TextView nombre, ubicacion, amenidades, precio, cantidadHabitaciones, cantidadPersonas;
 
-
-        public viewHolderPropiedad(@NonNull View itemView) {
+        public viewHolderPropiedad(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             nombre = itemView.findViewById(R.id.nombreTv);
@@ -64,6 +70,18 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
             cantidadHabitaciones = itemView.findViewById(R.id.cantidadHabitacionesTv);
             cantidadPersonas = itemView.findViewById(R.id.cantidadPersonasTv);
 
+            // Set the click listener on the entire item view
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

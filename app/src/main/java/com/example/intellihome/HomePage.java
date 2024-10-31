@@ -51,6 +51,14 @@ public class HomePage extends AppCompatActivity {
         adapterPropiedad = new AdapterPropiedad(propiedadArrayList);
         rv.setAdapter(adapterPropiedad);
 
+        adapterPropiedad.setOnItemClickListener(new AdapterPropiedad.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // Start the new activity
+                Intent intent = new Intent(HomePage.this, PasarelaPagos.class);
+                startActivity(intent);
+            }
+        });
 
         reference.addValueEventListener(new ValueEventListener() {
 
@@ -151,6 +159,8 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace(); // Imprime la traza de la excepción en Logcat
         }
+
+
     }
 
     private void buscar(String s) {
