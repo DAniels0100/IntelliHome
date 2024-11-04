@@ -3,11 +3,13 @@ package com.example.intellihome.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.intellihome.R;
 import com.example.intellihome.pojo.Propiedad;
 
@@ -43,12 +45,17 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
     public void onBindViewHolder(@NonNull viewHolderPropiedad holder, int position) {
         Propiedad propiedad = propiedadList.get(position);
 
-        holder.nombre.setText(propiedad.getNombre());
-        holder.ubicacion.setText(propiedad.getUbicacion());
-        holder.amenidades.setText(propiedad.getAmenidades());
-        holder.precio.setText(propiedad.getPrecio());
-        holder.cantidadHabitaciones.setText(String.valueOf(propiedad.getCantidadHabitaciones()));
-        holder.cantidadPersonas.setText(String.valueOf(propiedad.getCantidadPersonas()));
+        holder.nombre.setText("Nombre: "+propiedad.getNombre());
+        holder.ubicacion.setText("Ubicacion: "+propiedad.getUbicacion());
+        holder.amenidades.setText("Amenidades disponibles: "+propiedad.getAmenidades());
+        holder.precio.setText("Costo por noche: "+propiedad.getPrecio());
+        holder.cantidadHabitaciones.setText("Habitaciones: "+ String.valueOf(propiedad.getCantidadHabitaciones()));
+        holder.cantidadPersonas.setText("Cantidad de personas: "+ String.valueOf(propiedad.getCantidadPersonas()));
+
+        // Load background image with Glide
+        Glide.with(holder.itemView.getContext())
+                .load(propiedad.getImagenUrl())
+                .into(holder.imagenFondo);
     }
 
     @Override
@@ -59,6 +66,7 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
     public class viewHolderPropiedad extends RecyclerView.ViewHolder {
 
         TextView nombre, ubicacion, amenidades, precio, cantidadHabitaciones, cantidadPersonas;
+        ImageView imagenFondo;
 
         public viewHolderPropiedad(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -69,6 +77,7 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
             precio = itemView.findViewById(R.id.precioTv);
             cantidadHabitaciones = itemView.findViewById(R.id.cantidadHabitacionesTv);
             cantidadPersonas = itemView.findViewById(R.id.cantidadPersonasTv);
+            imagenFondo = itemView.findViewById(R.id.imagenCargadaPropiedad);
 
             // Set the click listener on the entire item view
             itemView.setOnClickListener(new View.OnClickListener() {
