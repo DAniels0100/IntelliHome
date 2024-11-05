@@ -10,8 +10,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -249,28 +254,60 @@ public class RegistroPropiedad extends AppCompatActivity {
         amenidadesCasaInput.setText("");
     }
 
-    // Método para mostrar el cuadro de selección múltiple para amenidades
+    // Método para mostrar el cuadro de seleccion múltiple para amenidades
     private void showAmenitiesDialog(TextInputEditText amenidadesEditText) {
-        String[] amenidadesArray = {"Wifi", "Aire acondicionado", "Cocina equipada", "Lavadora", "Estacionamiento", "TV", "Patio", "Terraza", "Piscina"};
+        String[] amenidadesArray = {"Wifi", "Aire acondicionado", "Calefaccion", "Cocina equipada", "Parrilla", "Jacuzzi",
+                "Caja de Seguridad", "Lavadora", "Secadora", "Secadora de pelo", "Gimnasio",
+                "Estacionamiento", "TV", "Patio", "Terraza", "Piscina", "Chimenea", "Sala de cine", "Sala de juegos", "Mesa de billar",
+                "Mesa de ping-pong", "Bar", "Zona para fogata", "Jardin", "Acceso a la playa"};
         boolean[] seleccionados = new boolean[amenidadesArray.length];
         ArrayList<String> amenidadesSeleccionadas = new ArrayList<>();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecciona las amenidades");
 
-        builder.setMultiChoiceItems(amenidadesArray, seleccionados, (dialog, which, isChecked) -> {
-            if (isChecked) {
-                amenidadesSeleccionadas.add(amenidadesArray[which]);
+        // Crear un ListView y configurarlo para permitir selección múltiple
+        ListView listView = new ListView(this);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, amenidadesArray);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            seleccionados[position] = !seleccionados[position];
+            if (seleccionados[position]) {
+                amenidadesSeleccionadas.add(amenidadesArray[position]);
             } else {
-                amenidadesSeleccionadas.remove(amenidadesArray[which]);
+                amenidadesSeleccionadas.remove(amenidadesArray[position]);
             }
         });
+
+        // Crea un ScrollView que contenga un LinearLayout, dentro del cual está el ListView
+        ScrollView scrollView = new ScrollView(this);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(listView);
+
+        scrollView.addView(layout);
+
+        // Limitar la altura del ListView dentro del ScrollView
+        listView.setLayoutParams(new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                1500 // Altura máxima del ListView para permitir desplazamiento en la vista completa
+        ));
+
+        builder.setView(scrollView);
 
         builder.setPositiveButton("OK", (dialog, which) -> {
             amenidadesEditText.setText(TextUtils.join(", ", amenidadesSeleccionadas));
         });
 
         builder.setNegativeButton("Cancelar", null);
-        builder.create().show();
+
+        // Crear el diálogo y ajustar su tamaño
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Ajusta el tamaño del diálogo
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1900);
     }
 }
