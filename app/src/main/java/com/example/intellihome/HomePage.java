@@ -34,8 +34,9 @@ public class HomePage extends AppCompatActivity {
     SearchView busqueda;
     AdapterPropiedad adapterPropiedad;
 
-    Button reservarBtn;
     LinearLayoutManager layoutManager;
+
+    public String montoPorPagar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,16 @@ public class HomePage extends AppCompatActivity {
         adapterPropiedad = new AdapterPropiedad(propiedadArrayList);
         rv.setAdapter(adapterPropiedad);
 
+
+        adapterPropiedad.setOnItemClickListener(new AdapterPropiedad.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(HomePage.this, PasarelaPagos.class);
+                intent.putExtra("montoPorPagar", propiedadArrayList.get(position).getPrecio());
+                startActivity(intent);
+                montoPorPagar = propiedadArrayList.get(position).getPrecio();
+            }
+        });
 
         reference.addValueEventListener(new ValueEventListener() {
 
@@ -97,14 +108,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        reservarBtn = findViewById(R.id.reservaBtn);
-
-        reservarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomePage.this, PasarelaPagos.class));
-            }
-        });
 
 
         try {
@@ -151,6 +154,8 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace(); // Imprime la traza de la excepción en Logcat
         }
+
+
     }
 
     private void buscar(String s) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ import org.json.JSONObject;
 public class PasarelaPagos extends AppCompatActivity {
 
     Button stripeButton;
-    EditText amountEditText;
+    TextView montoPagar;
     PaymentSheet paymentSheet;
     String paymentIntentClientSecret, amount;
     PaymentSheet.CustomerConfiguration customerConfig;
@@ -36,14 +37,16 @@ public class PasarelaPagos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pasarela_pagos);
         stripeButton = findViewById(R.id.stripeButton);
-        amountEditText = findViewById(R.id.amountEditText);
+        montoPagar = findViewById(R.id.montoPagarTxt);
+        String montoPorPagar = getIntent().getStringExtra("montoPorPagar");
+        montoPagar.setText(montoPorPagar);
 
         stripeButton.setOnClickListener(view ->{
-            if (TextUtils.isEmpty(amountEditText.getText()
+            if (TextUtils.isEmpty(montoPagar.getText()
                     .toString())){
                 Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show();
             } else {
-                amount = amountEditText.getText().toString() + "00";
+                amount = montoPagar.getText().toString();
                 getDetails();
             }
         });
@@ -56,7 +59,7 @@ public class PasarelaPagos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Redirige a HomePage
-                Intent intent = new Intent(PasarelaPagos.this, Perfil.class);
+                Intent intent = new Intent(PasarelaPagos.this, HomePage.class);
                 startActivity(intent);
                 finish(); // Finaliza la actividad actual
             }
