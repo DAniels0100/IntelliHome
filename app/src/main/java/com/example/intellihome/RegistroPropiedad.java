@@ -131,7 +131,8 @@ public class RegistroPropiedad extends AppCompatActivity {
     private void showAmenitiesDialog(TextInputEditText amenidadesEditText) {
         String[] amenidadesArray = {"Wifi", "Aire acondicionado", "Calefaccion", "Cocina equipada", "Parrilla", "Jacuzzi",
                 "Caja de Seguridad", "Lavadora", "Secadora", "Secadora de pelo", "Gimnasio",
-                "Estacionamiento", "TV", "Patio", "Terraza", "Piscina"};
+                "Estacionamiento", "TV", "Patio", "Terraza", "Piscina", "Chimenea", "Sala de cine", "Sala de juegos", "Mesa de billar",
+                "Mesa de ping-pong", "Bar", "Zona para fogata", "Jardin", "Acceso a la playa"};
         boolean[] seleccionados = new boolean[amenidadesArray.length];
         ArrayList<String> amenidadesSeleccionadas = new ArrayList<>();
 
@@ -164,7 +165,7 @@ public class RegistroPropiedad extends AppCompatActivity {
         // Limitar la altura del ListView dentro del ScrollView
         listView.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                600 // Altura máxima del ListView para permitir desplazamiento en la vista completa
+                1500 // Altura máxima del ListView para permitir desplazamiento en la vista completa
         ));
 
         builder.setView(scrollView);
@@ -180,7 +181,7 @@ public class RegistroPropiedad extends AppCompatActivity {
         dialog.show();
 
         // Ajusta el tamaño del diálogo
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1200);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1900);
     }
 
     // Clase para representar una propiedad
