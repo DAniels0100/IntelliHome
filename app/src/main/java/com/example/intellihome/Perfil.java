@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -91,7 +89,7 @@ public class Perfil extends AppCompatActivity {
         btnMetodoPagos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Perfil.this, PasarelaPagos.class));
+                startActivity(new Intent(Perfil.this, ReservacionPropiedad.class));
                 finish(); // Finaliza la actividad actual
             }
         });
@@ -143,7 +141,6 @@ public class Perfil extends AppCompatActivity {
     }
 
     private void cargarDatosUsuario(String nickname) {
-        Toast.makeText(this, "El nickname usado: " + nickname, Toast.LENGTH_SHORT).show();
 
         // Consulta a la base de datos para encontrar el usuario que coincide con el nickname
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
