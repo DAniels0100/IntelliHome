@@ -5,6 +5,7 @@ import android.hardware.usb.UsbManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +50,44 @@ public class Domotica extends AppCompatActivity {
             Intent intent = new Intent(Domotica.this, HomePage.class);
             startActivity(intent);
             finish(); // Finaliza la actividad actual
+        });
+
+        // Encuentra el ImageView de perfil
+        ImageView perfilMenu = findViewById(R.id.perfilmenu);
+        ImageView domoticaMenu = findViewById(R.id.domotica);
+        ImageView historialMenu = findViewById(R.id.historial);
+        ImageView busquedaMenu = findViewById(R.id.busquedamenu);
+
+        perfilMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Domotica.this, Perfil.class));
+                finish();
+            }
+        });
+
+        domoticaMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Domotica.this, Domotica.class));
+                finish();
+            }
+        });
+
+        historialMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Domotica.this, Historial.class));
+                finish();
+            }
+        });
+
+        busquedaMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Domotica.this, HomePage.class));
+                finish();
+            }
         });
     }
 
