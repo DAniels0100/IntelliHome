@@ -16,7 +16,7 @@ public class Domotica extends AppCompatActivity {
 
     private static final String SERVER_IP = "192.168.0.237"; // IP del servidor intermedio
     private static final int SERVER_PORT = 8888; // Puerto configurado en el servidor para los Sockets
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,18 @@ public class Domotica extends AppCompatActivity {
         Button buttonLed2 = findViewById(R.id.buttonLed2);
         Button buttonLed3 = findViewById(R.id.buttonLed3);
         Button buttonLed4 = findViewById(R.id.buttonLed4);
+        Button buttonSensorBall = findViewById(R.id.buttonSensorBall);
+        Button buttonSensorFlame = findViewById(R.id.buttonSensorFlame);
+        Button buttonSensorHumedad = findViewById(R.id.buttonSensorHumedad);
 
         // Configurar los botones para enviar comandos al Arduino a través del servidor
-        buttonLed1.setOnClickListener(v -> toggleLed(buttonLed1, "1", "2"));
-        buttonLed2.setOnClickListener(v -> toggleLed(buttonLed2, "3", "4"));
-        buttonLed3.setOnClickListener(v -> toggleLed(buttonLed3, "5", "6"));
-        buttonLed4.setOnClickListener(v -> toggleLed(buttonLed4, "7", "8"));
+        buttonLed1.setOnClickListener(v -> toggleDevice(buttonLed1, "1", "2"));
+        buttonLed2.setOnClickListener(v -> toggleDevice(buttonLed2, "3", "4"));
+        buttonLed3.setOnClickListener(v -> toggleDevice(buttonLed3, "5", "6"));
+        buttonLed4.setOnClickListener(v -> toggleDevice(buttonLed4, "7", "8"));
+        buttonSensorBall.setOnClickListener(v -> toggleDevice(buttonSensorBall, "TOGGLE_SENSOR_BALL", "TOGGLE_SENSOR_BALL"));
+        buttonSensorFlame.setOnClickListener(v -> toggleDevice(buttonSensorFlame, "TOGGLE_SENSOR_FLAME", "TOGGLE_SENSOR_FLAME"));
+        buttonSensorHumedad.setOnClickListener(v -> toggleDevice(buttonSensorHumedad, "TOGGLE_SENSOR_HUMEDAD", "TOGGLE_SENSOR_HUMEDAD"));
 
         // Encuentra el botón de regreso en el layout
         ImageView btnBack = findViewById(R.id.botonRegresar);
@@ -44,7 +50,7 @@ public class Domotica extends AppCompatActivity {
         });
     }
 
-    private void toggleLed(Button button, String commandOn, String commandOff) {
+    private void toggleDevice(Button button, String commandOn, String commandOff) {
         // Determinar el estado actual del botón
         boolean isOn = button.getText().toString().contains("ON");
         String newCommand = isOn ? commandOff : commandOn;

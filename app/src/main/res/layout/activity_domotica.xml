@@ -41,50 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Historial -->
-    <ImageView
-        android:id="@+id/historial"
-        android:layout_width="70dp"
-        android:layout_height="45dp"
-        android:src="@drawable/historial"
-        app:layout_constraintStart_toStartOf="@id/fondomenu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <!-- Domótica -->
-    <ImageView
-        android:id="@+id/domotica"
-        android:layout_width="70dp"
-        android:layout_height="45dp"
-        android:src="@drawable/domotica"
-        app:layout_constraintStart_toEndOf="@id/historial"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="32dp" />
-
-    <!-- Búsqueda -->
-    <ImageView
-        android:id="@+id/busquedamenu"
-        android:layout_width="70dp"
-        android:layout_height="45dp"
-        android:src="@drawable/busqueda"
-        app:layout_constraintStart_toEndOf="@id/domotica"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="5dp"/>
-
-    <!-- Perfil Menú -->
-    <ImageView
-        android:id="@+id/perfilmenu"
-        android:layout_width="70dp"
-        android:layout_height="45dp"
-        android:src="@drawable/perfil"
-        app:layout_constraintStart_toEndOf="@id/busquedamenu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="5dp"/>
     <!-- Botón LED 1 -->
     <Button
         android:id="@+id/buttonLed1"
@@ -126,6 +82,39 @@
         android:text="LED Cocina OFF"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/buttonLed3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón Sensor Ball -->
+    <Button
+        android:id="@+id/buttonSensorBall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sensor Ball OFF"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonLed4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón Sensor Flame -->
+    <Button
+        android:id="@+id/buttonSensorFlame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sensor Flame OFF"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonSensorBall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón Sensor Humedad -->
+    <Button
+        android:id="@+id/buttonSensorHumedad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sensor Humedad OFF"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonSensorFlame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
