@@ -1,1 +1,1 @@
-# IntelliHome2asd
+# IntelliHome, una app en desarrollo para arrendar y controlar de la domotica en un hogar

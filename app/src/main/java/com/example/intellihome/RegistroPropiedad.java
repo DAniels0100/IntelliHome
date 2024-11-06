@@ -25,6 +25,10 @@ public class RegistroPropiedad extends AppCompatActivity {
     private TextInputEditText nombrePropiedadInput, cantidadPersonasInput, cantidadHabitacionesInput, precioInput, ubicacionInput, amenidadesCasaInput;
     private Button registrarCasaBtn;
     private DatabaseReference databaseReference;
+    private ImageView imagenPropiedad;
+    private StorageReference storageReference;
+    private Uri imageUri; // Guardará la URI de la imagen seleccionada o tomada
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +43,26 @@ public class RegistroPropiedad extends AppCompatActivity {
         ubicacionInput = findViewById(R.id.ubicacionInput);
         amenidadesCasaInput = findViewById(R.id.amenidadesCasaInput);
         registrarCasaBtn = findViewById(R.id.registrarCasaBtn);
+        imagenPropiedad = findViewById(R.id.subirImagen);
 
         // Inicializa la referencia de la base de datos de Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Propiedades");
+        storageReference = FirebaseStorage.getInstance().getReference("ImagenesPropiedades");
+
+        // Configura la acción del botón Registrar
+        registrarCasaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registrarPropiedad();
+                //sendMessage();
+            }
+        });
+
+        //Configuracion del campo de foto
+        imagenPropiedad.setOnClickListener(view -> showImageOptionsDialog());
+
+        // Configuración del campo de amenidades con selección múltiple
+        amenidadesCasaInput.setOnClickListener(v -> showAmenitiesDialog(amenidadesCasaInput));
 
         // Encuentra el botón de regreso en el layout
         ImageView btnBack = findViewById(R.id.botonRegresar);
@@ -55,19 +76,106 @@ public class RegistroPropiedad extends AppCompatActivity {
                 finish(); // Finaliza la actividad actual
             }
         });
+    }
 
+    //subir foto
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_PICK = 2;
 
-        // Configura la acción del botón Registrar
-        registrarCasaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                registrarPropiedad();
-                //sendMessage();
+    // Mostrar opciones de "Tomar Foto" o "Seleccionar desde Galería"
+    private void showImageOptionsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecciona una opción");
+        String[] options = {"Tomar Foto", "Seleccionar desde Galería"};
+        builder.setItems(options, (dialog, which) -> {
+            if (which == 0) {
+                // Tomar foto
+                if (ContextCompat.checkSelfPermission(RegistroPropiedad.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(RegistroPropiedad.this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
+                } else {
+                    openCamera();
+                }
+            } else if (which == 1) {
+                // Seleccionar desde galería
+                openGallery();
             }
         });
+        builder.show();
+    }
 
-        // Configuración del campo de amenidades con selección múltiple
-        amenidadesCasaInput.setOnClickListener(v -> showAmenitiesDialog(amenidadesCasaInput));
+    // Abrir cámara
+    private void openCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    // Abrir galería
+    private void openGallery() {
+        Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imagenPropiedad.setImageBitmap(imageBitmap);
+
+                // Convierte el Bitmap en URI
+                imageUri = getImageUriFromBitmap(imageBitmap);
+            } else if (requestCode == REQUEST_IMAGE_PICK && data != null) {
+                imageUri = data.getData();
+                imagenPropiedad.setImageURI(imageUri); // Muestra la imagen seleccionada
+            }
+        }
+    }
+
+    // Convierte el Bitmap en una URI temporal para subirlo
+    private Uri getImageUriFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Foto", null);
+        return Uri.parse(path);
+    }
+
+    private void subirImagenYRegistrarPropiedad(Propiedad propiedad) {
+        if (imageUri != null) {
+            // Crear referencia en Firebase Storage con un nombre único
+            StorageReference fileRef = storageReference.child(System.currentTimeMillis() + ".jpg");
+
+            // Subir la imagen a Firebase Storage
+            fileRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+                // Obtener la URL de descarga
+                fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                    propiedad.setImagenUrl(uri.toString());  // Guardar URL en la propiedad
+                    registrarPropiedadEnDatabase(propiedad); // Guardar la propiedad en la DB
+                }).addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al obtener la URL de la imagen", Toast.LENGTH_SHORT).show()
+                );
+            }).addOnFailureListener(e ->
+                    Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show()
+            );
+        } else {
+            Toast.makeText(this, "Por favor selecciona una imagen", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void registrarPropiedadEnDatabase(Propiedad propiedad) {
+        String propiedadId = databaseReference.push().getKey();  // Genera un ID único
+        databaseReference.child(propiedadId).setValue(propiedad).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(RegistroPropiedad.this, "Propiedad registrada exitosamente", Toast.LENGTH_SHORT).show();
+                limpiarCampos();
+            } else {
+                Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void registrarPropiedad() {
@@ -104,18 +212,19 @@ public class RegistroPropiedad extends AppCompatActivity {
             return;
         }
 
-        // Crear el objeto Propiedad
-        Propiedad propiedad = new Propiedad(nombrePropiedad, cantidadPersonas, cantidadHabitaciones, precio, ubicacion, amenidadesCasa);
-
-        // Guardar la propiedad con el nombre de la casa como ID en Firebase
-        databaseReference.child(nombrePropiedad).setValue(propiedad).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
+        // Crear un objeto de propiedad temporal sin la URL de la imagen
+        Propiedad propiedad = new Propiedad(nombrePropiedad, precio, ubicacion, amenidadesCasa, cantidadPersonas, cantidadHabitaciones, null);
+        try{
+            subirImagenYRegistrarPropiedad(propiedad);
+            if (imageUri != null){
                 Toast.makeText(RegistroPropiedad.this, "Propiedad registrada exitosamente", Toast.LENGTH_SHORT).show();
                 limpiarCampos();
-            } else {
-                Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad", Toast.LENGTH_SHORT).show();
             }
-        });
+        }catch (Exception e){
+            Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad"+e, Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     private void limpiarCampos() {
@@ -176,6 +285,7 @@ public class RegistroPropiedad extends AppCompatActivity {
 
         builder.setNegativeButton("Cancelar", null);
 
+
         // Crear el diálogo y ajustar su tamaño
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -183,30 +293,4 @@ public class RegistroPropiedad extends AppCompatActivity {
         // Ajusta el tamaño del diálogo
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1900);
     }
-
-    // Clase para representar una propiedad
-    public static class Propiedad {
-        public String idPropiedad;
-        public String nombrePropiedad;
-        public int cantidadPersonas;
-        public int cantidadHabitaciones;
-        public String precio;
-        public String ubicacion;
-        public String amenidadesCasa;
-
-        public Propiedad() {
-            // Constructor vacío requerido para Firebase
-        }
-
-        public Propiedad(String nombrePropiedad, int cantidadPersonas, int cantidadHabitaciones,
-                         String precio, String ubicacion, String amenidadesCasa) {
-            this.nombrePropiedad = nombrePropiedad;
-            this.cantidadPersonas = cantidadPersonas;
-            this.cantidadHabitaciones = cantidadHabitaciones;
-            this.precio = precio;
-            this.ubicacion = ubicacion;
-            this.amenidadesCasa = amenidadesCasa;
-        }
-    }
 }
-

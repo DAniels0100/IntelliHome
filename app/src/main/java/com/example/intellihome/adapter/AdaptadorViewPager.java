@@ -1,9 +1,12 @@
-package com.example.intellihome;
+package com.example.intellihome.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.intellihome.PestanaDos;
+import com.example.intellihome.PestanaUno;
 
 public class AdaptadorViewPager extends FragmentStateAdapter {
     private final int NUM_TABS = 2; // Número de pestañas

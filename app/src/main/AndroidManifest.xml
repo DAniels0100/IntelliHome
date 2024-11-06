@@ -47,7 +47,7 @@
             android:name=".Historial"
             android:exported="false" />
         <activity
-            android:name=".PasarelaPagos"
+            android:name=".ReservacionPropiedad"
             android:exported="false" />
         <activity
             android:name=".Recuperar2"
