@@ -175,7 +175,8 @@
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="URL Ubicación"
+            android:hint="Ubicación"
+            android:clickable="true"
             android:padding="6dp"
             android:textColorHint="#477991"
             tools:ignore="TouchTargetSizeCheck" />
@@ -222,34 +223,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoIntelliHome" />
 
-
-
-    <!-- Botones de navegación de imagen -->
-
     <!-- Btn de confirmar registro -->
-
-    <ImageButton
-        android:id="@+id/prevImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/flecha_izq"
-        app:layout_constraintBottom_toBottomOf="@id/subirImagen"
-        app:layout_constraintEnd_toStartOf="@id/subirImagen"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/nextImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/flecha_der"
-        app:layout_constraintBottom_toBottomOf="@id/subirImagen"
-        app:layout_constraintStart_toEndOf="@id/subirImagen"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <Button
         android:id="@+id/registrarCasaBtn"
         android:layout_width="240dp"
@@ -266,5 +240,18 @@
         android:layout_marginTop="660dp"
         tools:ignore="MissingConstraints"/>
 
-    <!-- Botón flotante para agregar imagen -->
+    <Button
+        android:id="@+id/ubicacionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Agrega Ubicacion Exacta"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="510dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

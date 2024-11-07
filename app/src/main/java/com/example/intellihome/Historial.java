@@ -86,7 +86,7 @@ public class Historial extends AppCompatActivity {
             historialMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Historial.this, RegistroPropiedad.class));
+                    startActivity(new Intent(Historial.this, Historial.class));
                     finish();
                 }
             });
@@ -94,7 +94,7 @@ public class Historial extends AppCompatActivity {
             busquedaMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Historial.this, Historial.class));
+                    startActivity(new Intent(Historial.this, HomePage.class));
                     finish();
                 }
             });

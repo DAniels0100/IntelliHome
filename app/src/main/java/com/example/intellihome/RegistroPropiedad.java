@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,20 +32,32 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistroPropiedad extends AppCompatActivity {
 
     private TextInputEditText nombrePropiedadInput, cantidadPersonasInput, cantidadHabitacionesInput, precioInput, ubicacionInput, amenidadesCasaInput;
-    private Button registrarCasaBtn;
+    private Button registrarCasaBtn, ubicacionBtn;
     private DatabaseReference databaseReference;
     private ImageView imagenPropiedad;
     private StorageReference storageReference;
     private Uri imageUri; // Guardará la URI de la imagen seleccionada o tomada
+    private FusedLocationProviderClient fusedLocationClient;
+    private LocationManager locationManager;
+    private double latitude, longitude;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
 
 
     @Override
@@ -60,11 +73,18 @@ public class RegistroPropiedad extends AppCompatActivity {
         ubicacionInput = findViewById(R.id.ubicacionInput);
         amenidadesCasaInput = findViewById(R.id.amenidadesCasaInput);
         registrarCasaBtn = findViewById(R.id.registrarCasaBtn);
+        ubicacionBtn = findViewById(R.id.ubicacionBtn);
         imagenPropiedad = findViewById(R.id.subirImagen);
 
         // Inicializa la referencia de la base de datos de Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Propiedades");
         storageReference = FirebaseStorage.getInstance().getReference("ImagenesPropiedades");
+
+        // Inicializa el proveedor de ubicación
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // Inicializa el administrador de ubicación
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         // Configura la acción del botón Registrar
         registrarCasaBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +101,9 @@ public class RegistroPropiedad extends AppCompatActivity {
         // Configuración del campo de amenidades con selección múltiple
         amenidadesCasaInput.setOnClickListener(v -> showAmenitiesDialog(amenidadesCasaInput));
 
+        // Botón para obtener la ubicación
+        ubicacionBtn.setOnClickListener(v -> obtenerUbicacion());
+
         // Encuentra el botón de regreso en el layout
         ImageView btnBack = findViewById(R.id.botonRegresar);
 
@@ -93,6 +116,53 @@ public class RegistroPropiedad extends AppCompatActivity {
                 finish(); // Finaliza la actividad actual
             }
         });
+    }
+
+
+    // Solicitar permisos y obtener la ubicación
+    private void solicitarUbicacionYRegistrarPropiedad() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+        } else {
+            obtenerUbicacion();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                obtenerUbicacion();
+            } else {
+                Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Obtener la ubicación exacta
+    private void obtenerUbicacion() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(@NonNull Location location) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    registrarPropiedad(); // Registrar la propiedad cuando se obtenga la ubicación
+                    locationManager.removeUpdates(this); // Detener actualizaciones después de obtener la ubicación
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+                @Override
+                public void onProviderEnabled(@NonNull String provider) {}
+
+                @Override
+                public void onProviderDisabled(@NonNull String provider) {
+                    Toast.makeText(RegistroPropiedad.this, "Habilita el GPS para obtener la ubicación", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     //subir foto
@@ -202,6 +272,7 @@ public class RegistroPropiedad extends AppCompatActivity {
         String precio = precioInput.getText().toString().trim();
         String ubicacion = ubicacionInput.getText().toString().trim();
         String amenidadesCasa = amenidadesCasaInput.getText().toString().trim();
+        String ubicacionE = latitude + ", " + longitude;
 
         // Validar que los campos no estén vacíos
         if (TextUtils.isEmpty(nombrePropiedad) || TextUtils.isEmpty(cantidadPersonasStr) ||
@@ -230,7 +301,7 @@ public class RegistroPropiedad extends AppCompatActivity {
         }
 
         // Crear un objeto de propiedad temporal sin la URL de la imagen
-        Propiedad propiedad = new Propiedad(nombrePropiedad, precio, ubicacion, amenidadesCasa, cantidadPersonas, cantidadHabitaciones, null);
+        Propiedad propiedad = new Propiedad(nombrePropiedad, precio, ubicacion,  amenidadesCasa, cantidadPersonas, cantidadHabitaciones, null);
         try{
             subirImagenYRegistrarPropiedad(propiedad);
             if (imageUri != null){
@@ -251,6 +322,8 @@ public class RegistroPropiedad extends AppCompatActivity {
         precioInput.setText("");
         ubicacionInput.setText("");
         amenidadesCasaInput.setText("");
+        latitude = Double.parseDouble(null);
+        longitude = Double.parseDouble(null);
     }
 
     // Método para mostrar el cuadro de seleccion múltiple para amenidades
