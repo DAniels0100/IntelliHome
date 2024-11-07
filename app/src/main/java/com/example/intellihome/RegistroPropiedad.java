@@ -256,7 +256,7 @@ public class RegistroPropiedad extends AppCompatActivity {
     // Método para mostrar el cuadro de seleccion múltiple para amenidades
     private void showAmenitiesDialog(TextInputEditText amenidadesEditText) {
         String[] amenidadesArray = {"Wifi", "Aire acondicionado", "Calefaccion", "Cocina equipada", "Parrilla", "Jacuzzi",
-                "Caja de Seguridad", "Lavadora", "Secadora", "Secadora de pelo", "Gimnasio",
+                "Caja de Seguridad", "Lavadora", "Secadora", "Gimnasio",
                 "Estacionamiento", "TV", "Patio", "Terraza", "Piscina", "Chimenea", "Sala de cine", "Sala de juegos", "Mesa de billar",
                 "Mesa de ping-pong", "Bar", "Zona para fogata", "Jardin", "Acceso a la playa"};
         boolean[] seleccionados = new boolean[amenidadesArray.length];

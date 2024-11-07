@@ -1,0 +1,765 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+            <!-- Opción: Precio (Rango) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#477991"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_precio_min"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Precio mínimo"
+                    android:inputType="number"
+                    android:padding="8dp"/>
+
+                <EditText
+                    android:id="@+id/input_precio_max"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Precio máximo"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+
+            <!-- Opción de Ubicación -->
+            <TextView
+                android:id="@+id/ubicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicación"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#477991"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Layout Horizontal para el EditText e ImageView -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/input_ubicacion"
+                    android:layout_height="wrap_content"
+                    android:layout_width="270dp"
+                    android:hint="Ingrese la ubicación"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:layout_marginLeft="41dp"/>
+
+                <!-- Icono de Maps a la derecha del EditText -->
+                <ImageView
+                    android:id="@+id/busqueda_maps"
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="0dp"
+                    android:src="@drawable/maps"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="Abrir Mapa"/>
+            </LinearLayout>
+
+            <!-- Opción: Cantidad de Personas (Rango) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de Personas"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#477991"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_personas_min"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Mínimo"
+                    android:inputType="number"
+                    android:padding="8dp"/>
+
+                <EditText
+                    android:id="@+id/input_personas_max"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Máximo"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+
+            <!-- Opción: Cantidad de Habitaciones (Rango) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de Habitaciones"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#477991"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_habitaciones_min"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Mínimo"
+                    android:inputType="number"
+                    android:padding="8dp"/>
+
+                <EditText
+                    android:id="@+id/input_habitaciones_max"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Máximo"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+
+            <!-- Opción: Amenidades -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amenidades"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#477991"/>
+
+            <!-- Fila 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_wifi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Wifi"/>
+
+                    <ImageView
+                        android:id="@+id/icon_wifi"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_wifi"
+                        android:contentDescription="Icono de Wifi"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_aire_acondicionado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Aire Acondicionado"/>
+
+                    <ImageView
+                        android:id="@+id/icon_aire_acondicionado"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_aire_acondicionado"
+                        android:contentDescription="Icono de Aire Acondicionado"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_cocina_equipada"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Cocina equipada"/>
+
+                    <ImageView
+                        android:id="@+id/icon_cocina_equipada"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_cocina"
+                        android:contentDescription="Icono de Cocina Equipada"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fila 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_lavadora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Lavadora"/>
+
+                    <ImageView
+                        android:id="@+id/icon_lavadora"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_lavadora"
+                        android:contentDescription="Icono de Lavadora"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_estacionamiento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Estacionamiento"/>
+
+                    <ImageView
+                        android:id="@+id/icon_estacionamiento"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_estacionamiento"
+                        android:contentDescription="Icono de Estacionamiento"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="TV"/>
+
+                    <ImageView
+                        android:id="@+id/icon_tv"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_tv"
+                        android:contentDescription="Icono de Cocina Equipada"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fila 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_patio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Patio"/>
+
+                    <ImageView
+                        android:id="@+id/icon_patio"
+                        android:layout_width="22dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_patio"
+                        android:contentDescription="Icono de Patio"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_terraza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Terraza"/>
+
+                    <ImageView
+                        android:id="@+id/icon_terraza"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_terraza"
+                        android:contentDescription="Icono de Terraza"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_piscina"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Piscina"/>
+
+                    <ImageView
+                        android:id="@+id/icon_piscina"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_piscina"
+                        android:contentDescription="Icono de Piscina"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fila 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_calefaccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Calefaccion"/>
+
+                    <ImageView
+                        android:id="@+id/icon_calefaccion"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_calefaccion"
+                        android:contentDescription="Icono de Calefaccion"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_parrilla"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Parrilla"/>
+
+                    <ImageView
+                        android:id="@+id/icon_parrilla"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_parrilla"
+                        android:contentDescription="Icono de Parrilla"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_jacuzzi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Jacuzzi"/>
+
+                    <ImageView
+                        android:id="@+id/icon_jacuzzi"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_jacuzzi"
+                        android:contentDescription="Icono de Jacuzzi"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fila 5 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_caja_seguridad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Caja Seguridad"/>
+
+                    <ImageView
+                        android:id="@+id/icon_caja_seguridad"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_caja_seguridad"
+                        android:contentDescription="Icono de Caja Seguridad"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_secadora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Secadora"/>
+
+                    <ImageView
+                        android:id="@+id/icon_secadora"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_secadora"
+                        android:contentDescription="Icono de Secadora"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_gimnasio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Gimnasio"/>
+
+                    <ImageView
+                        android:id="@+id/icon_gimnasio"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_gimnasio"
+                        android:contentDescription="Icono de Gimnasio"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fila 6 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_chimenea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Chimenea"/>
+
+                    <ImageView
+                        android:id="@+id/icon_chimenea"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_chimenea"
+                        android:contentDescription="Icono de Chimenea"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="16dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_cine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Cine"/>
+
+                    <ImageView
+                        android:id="@+id/icon_cine"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_cine"
+                        android:contentDescription="Icono de Cine"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_juegos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Juegos"/>
+
+                    <ImageView
+                        android:id="@+id/icon_juegos"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_juegos"
+                        android:contentDescription="Icono de Juegos"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        <!-- Fila 7 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="8dp">
+
+            <!-- CheckBox y Icono Billar -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="16dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox_billar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Billar"/>
+
+                <ImageView
+                    android:id="@+id/icon_billar"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_billar"
+                    android:contentDescription="Icono de Billar"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+
+            <!-- CheckBox y Icono Ping Pong -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="16dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox_pingpong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Ping Pong"/>
+
+                <ImageView
+                    android:id="@+id/icon_pingpong"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_pingpong"
+                    android:contentDescription="Icono de Ping Pong"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+
+            <!-- CheckBox y Icono Bar -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/checkbox_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Bar"/>
+
+                <ImageView
+                    android:id="@+id/icon_bar"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_bar"
+                    android:contentDescription="Icono de Bar"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Fila 8 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="8dp">
+
+            <!-- CheckBox y Icono Fogata -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="16dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox_fogata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Fogata"/>
+
+                <ImageView
+                    android:id="@+id/icon_fogata"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_fogata"
+                    android:contentDescription="Icono de Fogata"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+
+            <!-- CheckBox y Icono Jardin -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="16dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox_jardin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Jardin"/>
+
+                <ImageView
+                    android:id="@+id/icon_jardin"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_jardin"
+                    android:contentDescription="Icono de Jardin"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+
+            <!-- CheckBox y Icono Playa -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/checkbox_playa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Playa"/>
+
+                <ImageView
+                    android:id="@+id/icon_playa"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_playa"
+                    android:contentDescription="Icono de Playa"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Botón de Buscar -->
+        <Button
+            android:id="@+id/boton_aplicar_filtros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#477991" />
+    </LinearLayout>
+</ScrollView>
