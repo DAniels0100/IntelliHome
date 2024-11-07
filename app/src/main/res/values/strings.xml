@@ -16,4 +16,14 @@
     <string name="Inglés">Inglés</string>
     <string name="botonRegresar">botonRegresar</string>
     <string name="title_activity_domotica">Domótica</string>
+    <string name="domotica_menu">domotica_menu</string>
+    <string name="perfil_menu">perfil_menu</string>
+    <string name="historial">historial</string>
+    <string name="domotica">domotica</string>
+    <string name="fondoMenu">fondoMenu</string>
+    <string name="reservar">reservar</string>
+    <string name="reservar1">Reservar</string>
+    <string name="textoHomePage">textoHomePage</string>
+    <string name="icono">icono</string>
+    <string name="google_maps_key">YOUR_API_KEY</string>
 </resources>

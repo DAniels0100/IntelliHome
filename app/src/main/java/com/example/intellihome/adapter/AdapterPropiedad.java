@@ -63,6 +63,12 @@ public class AdapterPropiedad extends RecyclerView.Adapter<AdapterPropiedad.view
         return propiedadList.size();
     }
 
+    // Método para actualizar los datos en el adaptador
+    public void updateData(List<Propiedad> nuevaLista) {
+        propiedadList = nuevaLista;
+        notifyDataSetChanged();
+    }
+
     public class viewHolderPropiedad extends RecyclerView.ViewHolder {
 
         TextView nombre, ubicacion, amenidades, precio, cantidadHabitaciones, cantidadPersonas;

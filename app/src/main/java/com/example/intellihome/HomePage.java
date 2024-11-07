@@ -22,18 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomePage extends AppCompatActivity {
-
+public class HomePage extends AppCompatActivity implements FiltrosDialog.FiltrosDialogListener {
 
     DatabaseReference reference;
     ArrayList<Propiedad> propiedadArrayList;
     RecyclerView rv;
     SearchView busqueda;
     AdapterPropiedad adapterPropiedad;
-
     LinearLayoutManager layoutManager;
-
     public String montoPorPagar;
 
     @Override
@@ -41,16 +39,49 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        // Inicializar vistas y Firebase
+        busqueda = findViewById(R.id.busqueda);
         reference = FirebaseDatabase.getInstance().getReference().child("Propiedades");
         rv = findViewById(R.id.rv);
-        busqueda = findViewById(R.id.busquedaInput);
         layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
+
+        // Configurar el adapter
         propiedadArrayList = new ArrayList<>();
         adapterPropiedad = new AdapterPropiedad(propiedadArrayList);
         rv.setAdapter(adapterPropiedad);
 
+        // Configuración de búsqueda
+        if (busqueda != null) {
+            busqueda.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
 
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    buscar(s);
+                    return true;
+                }
+            });
+        } else {
+            Log.e("HomePage", "SearchView is null!");
+        }
+
+        // Configuración del filtro de búsqueda
+        ImageView filtroBusqueda = findViewById(R.id.filtro_icono);
+        filtroBusqueda.bringToFront();
+        filtroBusqueda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("HomePage", "Filtro icon clicked");
+                FiltrosDialog filtrosDialog = new FiltrosDialog();
+                filtrosDialog.show(getSupportFragmentManager(), "filtros_dialog");
+            }
+        });
+
+        // Configuración del clic en el adaptador
         adapterPropiedad.setOnItemClickListener(new AdapterPropiedad.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -61,17 +92,16 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+        // Listener para cargar datos de Firebase
         reference.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     if (snapshot.exists()) {
-                        propiedadArrayList.clear(); // Clear list before adding new elements
+                        propiedadArrayList.clear();
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            // Check for null values and ensure correct structure
                             Propiedad propiedad = snapshot1.getValue(Propiedad.class);
-                            if (propiedad != null && propiedad.getNombre() != null) { // Example check
+                            if (propiedad != null && propiedad.getNombre() != null) {
                                 propiedadArrayList.add(propiedad);
                             } else {
                                 Log.e("HomePage", "Propiedad is null or missing fields.");
@@ -93,78 +123,84 @@ public class HomePage extends AppCompatActivity {
                 Toast.makeText(HomePage.this, "Error al acceder a la base de datos: " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        busqueda.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                buscar(s);
-                return true;
-            }
-        });
-
-
-
+        // Configuración del menú de navegación
         try {
-            // Encuentra el ImageView de perfil
             ImageView perfilMenu = findViewById(R.id.perfilmenu);
             ImageView domoticaMenu = findViewById(R.id.domotica);
             ImageView historialMenu = findViewById(R.id.historial);
             ImageView busquedaMenu = findViewById(R.id.busquedamenu);
 
-            perfilMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(HomePage.this, Perfil.class));
-                    finish();
-                }
-            });
-
-            domoticaMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(HomePage.this, Domotica.class));
-                    finish();
-                }
-            });
-
-            historialMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(HomePage.this, Historial.class));
-                    finish();
-                }
-            });
-
-            busquedaMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(HomePage.this, Domotica.class));
-                    finish();
-                }
-            });
+            perfilMenu.setOnClickListener(view -> startActivity(new Intent(HomePage.this, Perfil.class)));
+            domoticaMenu.setOnClickListener(view -> startActivity(new Intent(HomePage.this, Domotica.class)));
+            historialMenu.setOnClickListener(view -> startActivity(new Intent(HomePage.this, Historial.class)));
+            busquedaMenu.setOnClickListener(view -> startActivity(new Intent(HomePage.this, Domotica.class)));
 
         } catch (Exception e) {
-            // Muestra un mensaje en caso de error
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            e.printStackTrace(); // Imprime la traza de la excepción en Logcat
+            e.printStackTrace();
         }
-
-
     }
 
     private void buscar(String s) {
         ArrayList<Propiedad> listaPropiedades = new ArrayList<>();
-        for(Propiedad obj: propiedadArrayList){
-            if(obj.getNombre().toLowerCase().contains(s.toLowerCase()) || obj.getAmenidades().toLowerCase().contains(s.toLowerCase())
-            || obj.getPrecio().toLowerCase().contains(s.toLowerCase()) || obj.getUbicacion().toLowerCase().contains(s.toLowerCase())){
+        for (Propiedad obj : propiedadArrayList) {
+            if (obj.getNombre().toLowerCase().contains(s.toLowerCase()) ||
+                    obj.getAmenidades().toLowerCase().contains(s.toLowerCase()) ||
+                    obj.getPrecio().toLowerCase().contains(s.toLowerCase()) ||
+                    obj.getUbicacion().toLowerCase().contains(s.toLowerCase())) {
                 listaPropiedades.add(obj);
             }
         }
-        AdapterPropiedad adapterPropiedad = new AdapterPropiedad(listaPropiedades);
-        rv.setAdapter(adapterPropiedad);
+        adapterPropiedad.updateData(listaPropiedades);
+    }
+
+    // Método para aplicar filtros
+    @Override
+    public void onFiltrosAplicados(Bundle bundle) {
+        // Extraer los filtros desde el bundle
+        String ubicacion = bundle.getString("ubicacion", "");
+        String precioMin = bundle.getString("precioMin", "");
+        String precioMax = bundle.getString("precioMax", "");
+        String personasMin = bundle.getString("personasMin", "");
+        String personasMax = bundle.getString("personasMax", "");
+        String habitacionesMin = bundle.getString("habitacionesMin", "");
+        String habitacionesMax = bundle.getString("habitacionesMax", "");
+        ArrayList<String> amenidadesSeleccionadas = bundle.getStringArrayList("amenidadesSeleccionadas");
+
+        // Aplicar los filtros a la lista de propiedades
+        aplicarFiltros(ubicacion, precioMin, precioMax, personasMin, personasMax, habitacionesMin, habitacionesMax, amenidadesSeleccionadas);
+    }
+
+    private void aplicarFiltros(String ubicacion, String precioMin, String precioMax, String personasMin,
+                                String personasMax, String habitacionesMin, String habitacionesMax,
+                                ArrayList<String> amenidadesSeleccionadas) {
+        List<Propiedad> listaFiltrada = new ArrayList<>();
+
+        for (Propiedad propiedad : propiedadArrayList) {
+            boolean coincide = true;
+
+            // Verificar filtros de ubicación, precio, etc.
+            if (!ubicacion.isEmpty() && !propiedad.getUbicacion().equalsIgnoreCase(ubicacion)) coincide = false;
+            if (!precioMin.isEmpty() && Integer.parseInt(propiedad.getPrecio()) < Integer.parseInt(precioMin)) coincide = false;
+            if (!precioMax.isEmpty() && Integer.parseInt(propiedad.getPrecio()) > Integer.parseInt(precioMax)) coincide = false;
+            if (!personasMin.isEmpty() && propiedad.getCantidadPersonas() < Integer.parseInt(personasMin)) coincide = false;
+            if (!personasMax.isEmpty() && propiedad.getCantidadPersonas() > Integer.parseInt(personasMax)) coincide = false;
+            if (!habitacionesMin.isEmpty() && propiedad.getCantidadHabitaciones() < Integer.parseInt(habitacionesMin)) coincide = false;
+            if (!habitacionesMax.isEmpty() && propiedad.getCantidadHabitaciones() > Integer.parseInt(habitacionesMax)) coincide = false;
+
+            if (coincide && amenidadesSeleccionadas != null && !amenidadesSeleccionadas.isEmpty()) {
+                for (String amenidad : amenidadesSeleccionadas) {
+                    if (!propiedad.getAmenidades().contains(amenidad)) {
+                        coincide = false;
+                        break;
+                    }
+                }
+            }
+
+            if (coincide) listaFiltrada.add(propiedad);
+        }
+
+        adapterPropiedad.updateData(listaFiltrada);
     }
 }
