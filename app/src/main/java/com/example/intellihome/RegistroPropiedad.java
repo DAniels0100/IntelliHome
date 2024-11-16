@@ -240,8 +240,6 @@ public class RegistroPropiedad extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad"+e, Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private void limpiarCampos() {
