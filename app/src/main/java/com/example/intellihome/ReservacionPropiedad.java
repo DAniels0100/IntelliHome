@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.kittinunf.fuel.Fuel;
 import com.github.kittinunf.fuel.core.FuelError;
+import com.github.kittinunf.result.Result;
+import com.github.kittinunf.fuel.core.FuelError;
 import com.github.kittinunf.fuel.core.Handler;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.PaymentSheet;
@@ -23,6 +25,7 @@ import com.stripe.android.paymentsheet.PaymentSheetResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ReservacionPropiedad extends AppCompatActivity {
@@ -50,10 +53,31 @@ public class ReservacionPropiedad extends AppCompatActivity {
             if (!isDateSelectionComplete()) {
                 Toast.makeText(this, "Por favor, seleccionar las fechas para realizar la reservacion", Toast.LENGTH_SHORT).show();
             } else {
-                amount = montoPagar.getText().toString()+"00";
+                amount = montoPagar.getText().toString() + "00";
                 getDetails();
+
+                // Llamada a Fuel.post con lista de parámetros vacía
+                Fuel.INSTANCE.post("http://127.0.0.1:5000/send-whatsapp", new ArrayList<>())
+                        .responseString((request, response, result) -> {
+                            result.fold(
+                                    success -> {
+                                        runOnUiThread(() ->
+                                                Toast.makeText(ReservacionPropiedad.this, "Mensaje de reservación enviado", Toast.LENGTH_SHORT).show()
+                                        );
+                                        return null; // Ensure there’s a return statement here
+                                    },
+                                    failure -> {
+                                        runOnUiThread(() ->
+                                                Toast.makeText(ReservacionPropiedad.this, "Error al enviar el mensaje", Toast.LENGTH_SHORT).show()
+                                        );
+                                        return null; // Ensure there’s a return statement here as well
+                                    }
+                            );
+                            return null; // Needed to satisfy lambda return type for `responseString`
+                        });
             }
         });
+
 
         // Seleccionar las fechas de la reservacion
         startDateButton = findViewById(R.id.startDateButton);

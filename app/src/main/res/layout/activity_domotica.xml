@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/HomePage"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,6 +30,117 @@
         android:src="@drawable/botonregresar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Imagen de fondo de la casa -->
+    <ImageView
+        android:id="@+id/fondoCasa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/do_casadomo"
+        android:contentDescription="Imagen de la casa"/>
+
+    <!-- Imagen de bombillo (apagado) -->
+    <ImageView
+        android:id="@+id/bombillodor1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/do_bombap"
+        android:contentDescription="Bombillo Dormitorio 1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="245dp"
+        app:layout_constraintHorizontal_bias="0.4"/>
+
+    <!-- Imagen de bombillo (apagado) -->
+    <ImageView
+        android:id="@+id/bombillodor2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/do_bombap"
+        android:contentDescription="Bombillo Dormitorio 2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="245dp"
+        app:layout_constraintHorizontal_bias="0.63"/>
+
+    <!-- Imagen de bombillo cocina -->
+    <ImageView
+        android:id="@+id/bombillococina"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Bombillo Cocina"
+        android:src="@drawable/do_bombap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="340dp"
+        app:layout_constraintHorizontal_bias="0.63"/>
+
+    <!-- Imagen de bombillo baño (apagado) -->
+    <ImageView
+        android:id="@+id/bombillobaño1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Bombillo Baño 1"
+        android:src="@drawable/do_bombap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="480dp"
+        app:layout_constraintHorizontal_bias="0.84"/>
+
+    <!-- Imagen de sensor de fuego -->
+    <ImageView
+        android:id="@+id/sensorFuego"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Sensor de Fuego"
+        android:src="@drawable/do_sensfuepren"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="388dp"
+        app:layout_constraintHorizontal_bias="0.63"/>
+
+    <!-- Imagen de sensor de humedad -->
+    <ImageView
+        android:id="@+id/sensorHumedad"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Sensor de Humedad"
+        android:src="@drawable/do_senshumap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="288dp"
+        app:layout_constraintHorizontal_bias="0.85"/>
+
+    <!-- Imagen de porton -->
+    <ImageView
+        android:id="@+id/porton"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="375dp"
+        android:contentDescription="Porton"
+        android:src="@drawable/do_porton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sensorMovimiento"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/do_sensmovpren"
+        android:contentDescription="Sensor de Movimiento"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="360dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4" />
 
     <ImageView
         android:id="@+id/fondomenu"
@@ -85,48 +195,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="5dp"/>
-    <!-- Botón LED 1 -->
-    <Button
-        android:id="@+id/buttonLed1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LED 1 OFF"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/logoIntelliHome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Botón LED 2 -->
-    <Button
-        android:id="@+id/buttonLed2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LED 2 OFF"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/buttonLed1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Botón LED 3 -->
-    <Button
-        android:id="@+id/buttonLed3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LED 3 OFF"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/buttonLed2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Botón LED 4 -->
-    <Button
-        android:id="@+id/buttonLed4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LED 4 OFF"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/buttonLed3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

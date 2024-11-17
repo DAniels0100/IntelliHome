@@ -59,10 +59,17 @@ dependencies {
     implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
     implementation "com.stripe:stripe-java:27.0.0"
 
+    // Enviar mensajes con Twilio
+    implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
+    implementation 'com.github.kittinunf.fuel:fuel-android:2.3.1'
+    implementation 'com.github.kittinunf.fuel:fuel-json:2.3.1'
+
+
     //Buscador
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.mik3y:usb-serial-for-android:3.4.6'
+    implementation 'androidx.biometric:biometric:1.1.0'
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -88,6 +95,7 @@ dependencies {
 
     //cargar las imagenes desde la base de datos
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation libs.biometric
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
 
 
