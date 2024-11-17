@@ -26,6 +26,8 @@ public class RegistroPropiedadTest {
     private String propiedadId = "-OAv-UaXFrKA8A6CgMoA";
     private Propiedad propiedad;
 
+
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);

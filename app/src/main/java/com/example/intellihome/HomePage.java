@@ -1,6 +1,8 @@
 package com.example.intellihome;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -167,4 +171,6 @@ public class HomePage extends AppCompatActivity {
         AdapterPropiedad adapterPropiedad = new AdapterPropiedad(listaPropiedades);
         rv.setAdapter(adapterPropiedad);
     }
+
+
 }
