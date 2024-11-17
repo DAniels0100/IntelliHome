@@ -41,7 +41,7 @@ public class RegistroPropiedad extends AppCompatActivity {
 
     private TextInputEditText nombrePropiedadInput, cantidadPersonasInput, cantidadHabitacionesInput, precioInput, ubicacionInput, amenidadesCasaInput;
     private Button registrarCasaBtn;
-    private DatabaseReference databaseReference;
+    public DatabaseReference databaseReference;
     private ImageView imagenPropiedad;
     private StorageReference storageReference;
     private Uri imageUri; // Guardará la URI de la imagen seleccionada o tomada
@@ -94,6 +94,15 @@ public class RegistroPropiedad extends AppCompatActivity {
             }
         });
     }
+
+    public void setDatabaseReference(DatabaseReference databaseReference) {
+        this.databaseReference = databaseReference;
+    }
+
+    public void setStorageReference(StorageReference storageReference) {
+        this.storageReference = storageReference;
+    }
+
 
     //subir foto
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -172,18 +181,18 @@ public class RegistroPropiedad extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
                     propiedad.setImagenUrl(uri.toString());  // Guardar URL en la propiedad
                     registrarPropiedadEnDatabase(propiedad); // Guardar la propiedad en la DB
-                }).addOnFailureListener(e ->
-                        Toast.makeText(this, "Error al obtener la URL de la imagen", Toast.LENGTH_SHORT).show()
-                );
-            }).addOnFailureListener(e ->
-                    Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show()
-            );
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al obtener la URL de la imagen", Toast.LENGTH_SHORT).show();
+                });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+            });
         } else {
             Toast.makeText(this, "Por favor selecciona una imagen", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void registrarPropiedadEnDatabase(Propiedad propiedad) {
+    protected void registrarPropiedadEnDatabase(Propiedad propiedad) {
         String propiedadId = databaseReference.push().getKey();  // Genera un ID único
         databaseReference.child(propiedadId).setValue(propiedad).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -195,7 +204,7 @@ public class RegistroPropiedad extends AppCompatActivity {
         });
     }
 
-    private void registrarPropiedad() {
+    public void registrarPropiedad() {
         String nombrePropiedad = nombrePropiedadInput.getText().toString().trim();
         String cantidadPersonasStr = cantidadPersonasInput.getText().toString().trim();
         String cantidadHabitacionesStr = cantidadHabitacionesInput.getText().toString().trim();
@@ -231,16 +240,11 @@ public class RegistroPropiedad extends AppCompatActivity {
 
         // Crear un objeto de propiedad temporal sin la URL de la imagen
         Propiedad propiedad = new Propiedad(nombrePropiedad, precio, ubicacion, amenidadesCasa, cantidadPersonas, cantidadHabitaciones, null);
-        try{
-            subirImagenYRegistrarPropiedad(propiedad);
-            if (imageUri != null){
-                Toast.makeText(RegistroPropiedad.this, "Propiedad registrada exitosamente", Toast.LENGTH_SHORT).show();
-                limpiarCampos();
-            }
-        }catch (Exception e){
-            Toast.makeText(RegistroPropiedad.this, "Error al registrar la propiedad"+e, Toast.LENGTH_SHORT).show();
-        }
+
+        // Subir la imagen y registrar la propiedad
+        subirImagenYRegistrarPropiedad(propiedad);
     }
+
 
     private void limpiarCampos() {
         nombrePropiedadInput.setText("");
